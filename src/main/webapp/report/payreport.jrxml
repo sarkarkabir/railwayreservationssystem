@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="0" uuid="157bf7c0-159c-4973-9647-8ec5dcab5a9d">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="8"/>
+	<style name="Title" fontName="Arial" fontSize="26" isBold="true" pdfFontName="Helvetica-Bold"/>
+	<style name="SubTitle" forecolor="#666666" fontName="Arial" fontSize="18"/>
+	<style name="Column header" forecolor="#FFFFFF" fontName="Arial" fontSize="12" isBold="true"/>
+	<style name="Detail" fontName="Arial" fontSize="12"/>
+	<parameter name="resid" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT payment.paymentid,
+       payment.resid,
+       payment.fareid,
+       payment.fareamt,
+       payment.qty,
+       payment.total
+FROM bdrailwayone.reservation reservation
+     INNER JOIN bdrailwayone.payment payment
+        ON (reservation.resid = payment.resid)
+where  payment.resid=$P{resid}]]>
+	</queryString>
+	<field name="paymentid" class="java.lang.Long">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="resid" class="java.lang.Long">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="fareid" class="java.lang.Long">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="fareamt" class="java.lang.Double">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="qty" class="java.lang.Long">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="total" class="java.lang.Double">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<title>
+		<band height="104" splitType="Stretch">
+			<staticText>
+				<reportElement style="Title" mode="Opaque" x="0" y="0" width="802" height="67" backcolor="#FF3333" uuid="a4819e09-3387-4b78-85bd-f662d2e9c6f4"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="54" isBold="false" pdfFontName="Helvetica"/>
+				</textElement>
+				<text><![CDATA[Ticket payment Report]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="SubTitle" mode="Opaque" x="0" y="67" width="800" height="37" forecolor="#66FF99" backcolor="#000000" uuid="83b50389-6315-4d34-a216-095145e788a4"/>
+				<textElement textAlignment="Center">
+					<font size="26"/>
+				</textElement>
+				<text><![CDATA[Payment]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="25" splitType="Stretch">
+			<frame>
+				<reportElement mode="Opaque" x="97" y="5" width="705" height="20" backcolor="#666666" uuid="83339c7f-ec3d-4968-85ff-01320ac2945e"/>
+				<staticText>
+					<reportElement style="Column header" x="0" y="0" width="117" height="15" uuid="a0342687-d8cd-40c1-8981-5897dde738b7"/>
+					<text><![CDATA[paymentid]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="Column header" x="117" y="0" width="117" height="15" uuid="b150ad3e-74b9-4be5-8a4d-8f710a1cec22"/>
+					<text><![CDATA[resid]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="Column header" x="234" y="0" width="117" height="15" uuid="35c1ec68-e008-45ba-b576-85f36c86057d"/>
+					<text><![CDATA[fareid]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="Column header" x="351" y="0" width="117" height="15" uuid="bb5bee21-de2d-4f71-b5f9-c266c5085c7c"/>
+					<text><![CDATA[fareamt]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="Column header" x="468" y="0" width="117" height="15" uuid="fc2f3fa6-99fb-488a-8664-4008ffc30d16"/>
+					<text><![CDATA[qty]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="Column header" x="585" y="0" width="117" height="15" uuid="f729db6f-d3ad-435e-9161-09df8fbd3848"/>
+					<text><![CDATA[total]]></text>
+				</staticText>
+			</frame>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="21" splitType="Stretch">
+			<frame>
+				<reportElement x="97" y="1" width="705" height="15" uuid="3b4ff3a2-cc14-45ed-8a2c-4e3f331d4cba"/>
+				<textField>
+					<reportElement style="Detail" x="0" y="0" width="117" height="15" uuid="78108a98-b89f-49fc-a350-071c3f73feab"/>
+					<textFieldExpression><![CDATA[$F{paymentid}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement style="Detail" x="117" y="0" width="117" height="15" uuid="9e949b89-7a93-4271-81e1-a928c7853747"/>
+					<textFieldExpression><![CDATA[$F{resid}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement style="Detail" x="234" y="0" width="117" height="15" uuid="4e4302ec-2cb9-4c32-b461-042c327a1aaa"/>
+					<textFieldExpression><![CDATA[$F{fareid}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement style="Detail" x="351" y="0" width="117" height="15" uuid="024fccb7-d596-445c-b20b-5d3c4f3afe83"/>
+					<textFieldExpression><![CDATA[$F{fareamt}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement style="Detail" x="468" y="0" width="117" height="15" uuid="5b842c06-ef3c-4a83-bb77-828accb3d237"/>
+					<textFieldExpression><![CDATA[$F{qty}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement style="Detail" x="585" y="0" width="117" height="15" uuid="f4c1ab9f-d542-4694-8112-a64a21e5c65f"/>
+					<textFieldExpression><![CDATA[$F{total}]]></textFieldExpression>
+				</textField>
+			</frame>
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="97" y="16" width="705" height="1" uuid="de0ffa9b-dbe6-497b-85b4-4fb2fa4df850"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="39" splitType="Stretch">
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement style="Column header" x="671" y="0" width="131" height="20" forecolor="#000000" uuid="a0ad2c4a-8e71-4337-8bb3-5df1ee2bbf80"/>
+				<textElement textAlignment="Right">
+					<font size="12" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="96" y="0" width="267" height="20" uuid="e16ddf38-ea2c-4f7c-83f5-b982cb408be6"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Silhouette Title Report]]></text>
+			</staticText>
+		</band>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="0" uuid="43a6b56b-63a8-4f29-acbf-a384a81698ca">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="Title" fontName="Arial" fontSize="26" isBold="true" pdfFontName="Helvetica-Bold"/>
+	<style name="SubTitle" forecolor="#666666" fontName="Arial" fontSize="18"/>
+	<style name="Column header" forecolor="#FFFFFF" fontName="Arial" fontSize="12" isBold="true"/>
+	<style name="Detail" fontName="Arial" fontSize="12"/>
+	<parameter name="fromst" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="tost" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="comn" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT farechart.fareid,
+       farechart.fromstationid,
+       farechart.tostationid,
+       farechart.comname,
+       farechart.fareamt
+FROM bdrailwayone.farechart farechart
+where  farechart.fromstationid=$P{fromst}
+and  farechart.tostationid=$P{tost} 
+and farechart.comname=$P{comn};]]>
+	</queryString>
+	<field name="fareid" class="java.lang.Long">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="fromstationid" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="tostationid" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="comname" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="fareamt" class="java.lang.Double">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<title>
+		<band height="104" splitType="Stretch">
+			<staticText>
+				<reportElement style="Title" mode="Opaque" x="0" y="0" width="802" height="67" backcolor="#33FFCC" uuid="41b40ad9-2b7b-48f4-bacf-45e2c5062559"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="54" isBold="false" pdfFontName="Helvetica"/>
+				</textElement>
+				<text><![CDATA[Railway Fare Amout]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="SubTitle" mode="Opaque" x="0" y="67" width="800" height="37" forecolor="#FFFFFF" backcolor="#000000" uuid="993b2d2e-942b-4ca0-9127-30e5822f1dde"/>
+				<textElement textAlignment="Center">
+					<font size="26"/>
+				</textElement>
+				<text><![CDATA[fareamount per seat]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="25" splitType="Stretch">
+			<frame>
+				<reportElement mode="Opaque" x="97" y="5" width="705" height="20" backcolor="#666666" uuid="6348b288-7fbb-4e51-894f-d2d454766ea3"/>
+				<staticText>
+					<reportElement style="Column header" x="0" y="0" width="141" height="15" uuid="3706580c-7c8e-49e4-a311-4e1b188d8e15"/>
+					<text><![CDATA[fareid]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="Column header" x="141" y="0" width="141" height="15" uuid="ecd0f5b8-55f1-4580-8bc5-04883a66766c"/>
+					<text><![CDATA[fromstationid]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="Column header" x="282" y="0" width="141" height="15" uuid="eee8d075-ae8c-41a6-a55b-daf1f0f53ef9"/>
+					<text><![CDATA[tostationid]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="Column header" x="423" y="0" width="141" height="15" uuid="8c290bdf-9d5d-4647-933e-202bc781ef80"/>
+					<text><![CDATA[comname]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="Column header" x="564" y="0" width="141" height="15" uuid="ec2387e4-06d1-4796-8ab8-c16748fa3f7a"/>
+					<text><![CDATA[fareamt]]></text>
+				</staticText>
+			</frame>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="21" splitType="Stretch">
+			<frame>
+				<reportElement x="97" y="1" width="705" height="15" uuid="b755b767-51bd-4103-b82d-3c2ff45f35a1"/>
+				<textField>
+					<reportElement style="Detail" x="0" y="0" width="141" height="15" uuid="a35b09e3-4ed2-4254-871c-e7a3490e418f"/>
+					<textFieldExpression><![CDATA[$F{fareid}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement style="Detail" x="141" y="0" width="141" height="15" uuid="554170d0-08e8-46ea-b6c2-07f036878dec"/>
+					<textFieldExpression><![CDATA[$F{fromstationid}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement style="Detail" x="282" y="0" width="141" height="15" uuid="44e6e4a3-0d1b-426f-aa56-5799acb21e3e"/>
+					<textFieldExpression><![CDATA[$F{tostationid}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement style="Detail" x="423" y="0" width="141" height="15" uuid="e548c46f-f065-4b0c-9799-fb7d33538bf8"/>
+					<textFieldExpression><![CDATA[$F{comname}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement style="Detail" x="564" y="0" width="141" height="15" uuid="3f74d472-240f-4864-b029-19e6aec13d11"/>
+					<textFieldExpression><![CDATA[$F{fareamt}]]></textFieldExpression>
+				</textField>
+			</frame>
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="97" y="16" width="705" height="1" uuid="b061a958-ac97-41ad-b147-6917798cd42c"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="70" splitType="Stretch">
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement style="Column header" x="671" y="0" width="131" height="20" forecolor="#000000" uuid="39e7a7ab-3ece-4fbd-bf72-a63fdaac4f33"/>
+				<textElement textAlignment="Right">
+					<font size="12" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="96" y="0" width="267" height="20" uuid="e8cec25c-c6b2-4a1a-8214-9dea6a91c7f9"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Silhouette Title Report]]></text>
+			</staticText>
+		</band>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

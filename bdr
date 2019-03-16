@@ -1,0 +1,247 @@
+-- MySQL Administrator dump 1.4
+--
+-- ------------------------------------------------------
+-- Server version	5.0.41-community-nt
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+
+
+--
+-- Create schema bdrailwayone
+--
+
+CREATE DATABASE IF NOT EXISTS bdrailwayone;
+USE bdrailwayone;
+
+--
+-- Definition of table `addstation`
+--
+
+DROP TABLE IF EXISTS `addstation`;
+CREATE TABLE `addstation` (
+  `stationid` int(10) unsigned NOT NULL auto_increment,
+  `stationname` varchar(255) default NULL,
+  PRIMARY KEY  (`stationid`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `addstation`
+--
+
+/*!40000 ALTER TABLE `addstation` DISABLE KEYS */;
+INSERT INTO `addstation` (`stationid`,`stationname`) VALUES 
+ (1,'dhaka'),
+ (2,'chittagong'),
+ (3,'Noakhali');
+/*!40000 ALTER TABLE `addstation` ENABLE KEYS */;
+
+
+--
+-- Definition of table `category`
+--
+
+DROP TABLE IF EXISTS `category`;
+CREATE TABLE `category` (
+  `catid` varchar(255) NOT NULL,
+  `catname` varchar(255) default NULL,
+  `description` varchar(255) default NULL,
+  PRIMARY KEY  (`catid`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `category`
+--
+
+/*!40000 ALTER TABLE `category` DISABLE KEYS */;
+INSERT INTO `category` (`catid`,`catname`,`description`) VALUES 
+ ('1','AC','high quality'),
+ ('2','NON_AC','best quality');
+/*!40000 ALTER TABLE `category` ENABLE KEYS */;
+
+
+--
+-- Definition of table `compartmenttype`
+--
+
+DROP TABLE IF EXISTS `compartmenttype`;
+CREATE TABLE `compartmenttype` (
+  `comtypeid` int(10) unsigned NOT NULL auto_increment,
+  `comname` varchar(45) default NULL,
+  `totalseat` double default NULL,
+  PRIMARY KEY  (`comtypeid`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `compartmenttype`
+--
+
+/*!40000 ALTER TABLE `compartmenttype` DISABLE KEYS */;
+INSERT INTO `compartmenttype` (`comtypeid`,`comname`,`totalseat`) VALUES 
+ (1,'ekatas',500),
+ (2,'suborna',80),
+ (3,'Ka',90);
+/*!40000 ALTER TABLE `compartmenttype` ENABLE KEYS */;
+
+
+--
+-- Definition of table `passengerinfo`
+--
+
+DROP TABLE IF EXISTS `passengerinfo`;
+CREATE TABLE `passengerinfo` (
+  `passid` int(10) unsigned NOT NULL auto_increment,
+  `passname` varchar(45) default NULL,
+  `passadd` varchar(45) default NULL,
+  `passdob` varchar(45) default NULL,
+  `passgender` varchar(45) default NULL,
+  `regdate` date default NULL,
+  `passstatus` varchar(45) default NULL,
+  PRIMARY KEY  (`passid`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `passengerinfo`
+--
+
+/*!40000 ALTER TABLE `passengerinfo` DISABLE KEYS */;
+INSERT INTO `passengerinfo` (`passid`,`passname`,`passadd`,`passdob`,`passgender`,`regdate`,`passstatus`) VALUES 
+ (1,'sarkar','malibag','30/11/2018','male','2018-05-12','available'),
+ (2,'sujan','shatibag','29/11/2018','male','2020-06-11','available'),
+ (3,'shakib','gdfgdf','02/02/1992','male','2020-05-11','available');
+/*!40000 ALTER TABLE `passengerinfo` ENABLE KEYS */;
+
+
+--
+-- Definition of table `passengertype`
+--
+
+DROP TABLE IF EXISTS `passengertype`;
+CREATE TABLE `passengertype` (
+  `passtypeid` int(10) unsigned NOT NULL auto_increment,
+  `passtype` varchar(45) default NULL,
+  PRIMARY KEY  (`passtypeid`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `passengertype`
+--
+
+/*!40000 ALTER TABLE `passengertype` DISABLE KEYS */;
+INSERT INTO `passengertype` (`passtypeid`,`passtype`) VALUES 
+ (1,'single'),
+ (2,'double');
+/*!40000 ALTER TABLE `passengertype` ENABLE KEYS */;
+
+
+--
+-- Definition of table `traininfo`
+--
+
+DROP TABLE IF EXISTS `traininfo`;
+CREATE TABLE `traininfo` (
+  `trainid` int(10) unsigned NOT NULL auto_increment,
+  `trainnumber` varchar(45) default NULL,
+  `trainname` varchar(45) default NULL,
+  `fromstationid` varchar(45) default NULL,
+  `tostationid` varchar(45) default NULL,
+  `depaturetime` date default NULL,
+  `arivaltime` date default NULL,
+  `dayoff` date default NULL,
+  PRIMARY KEY  (`trainid`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `traininfo`
+--
+
+/*!40000 ALTER TABLE `traininfo` DISABLE KEYS */;
+INSERT INTO `traininfo` (`trainid`,`trainnumber`,`trainname`,`fromstationid`,`tostationid`,`depaturetime`,`arivaltime`,`dayoff`) VALUES 
+ (1,'101','Ektaexpress','dhaka','dinajpur','2018-12-01','2018-12-01','2018-12-01');
+/*!40000 ALTER TABLE `traininfo` ENABLE KEYS */;
+
+
+--
+-- Definition of table `trainseat`
+--
+
+DROP TABLE IF EXISTS `trainseat`;
+CREATE TABLE `trainseat` (
+  `seatid` int(10) unsigned NOT NULL auto_increment,
+  `trainid` int(10) unsigned default NULL,
+  `comtypeid` int(10) unsigned default NULL,
+  `noofcompartment` varchar(45) default NULL,
+  PRIMARY KEY  (`seatid`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `trainseat`
+--
+
+/*!40000 ALTER TABLE `trainseat` DISABLE KEYS */;
+/*!40000 ALTER TABLE `trainseat` ENABLE KEYS */;
+
+
+--
+-- Definition of table `user`
+--
+
+DROP TABLE IF EXISTS `user`;
+CREATE TABLE `user` (
+  `emailid` varchar(255) NOT NULL,
+  `phone` varchar(255) default NULL,
+  `username` varchar(255) default NULL,
+  PRIMARY KEY  (`emailid`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `user`
+--
+
+/*!40000 ALTER TABLE `user` DISABLE KEYS */;
+INSERT INTO `user` (`emailid`,`phone`,`username`) VALUES 
+ ('kabir@gmail.com','01840029501','sujan'),
+ ('sku@gmail.com','+88','sk');
+/*!40000 ALTER TABLE `user` ENABLE KEYS */;
+
+
+--
+-- Definition of table `userrole`
+--
+
+DROP TABLE IF EXISTS `userrole`;
+CREATE TABLE `userrole` (
+  `emailid` varchar(255) NOT NULL,
+  `password` varchar(255) default NULL,
+  `role` varchar(255) default NULL,
+  `status` varchar(255) default NULL,
+  PRIMARY KEY  (`emailid`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `userrole`
+--
+
+/*!40000 ALTER TABLE `userrole` DISABLE KEYS */;
+INSERT INTO `userrole` (`emailid`,`password`,`role`,`status`) VALUES 
+ ('kabir@gmail.com','123','ROLE_USER','True'),
+ ('sku@gmail.com','1234','ROLE_USER','True');
+/*!40000 ALTER TABLE `userrole` ENABLE KEYS */;
+
+
+
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

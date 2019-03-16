@@ -1,0 +1,270 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="127c9656-a4a2-4909-a3b2-b6b94e0d7a08">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="Title" fontName="Times New Roman" fontSize="50" isBold="true" pdfFontName="Times-Bold"/>
+	<style name="SubTitle" forecolor="#736343" fontName="Arial" fontSize="18"/>
+	<style name="Column header" forecolor="#666666" fontName="Arial" fontSize="12" isBold="true"/>
+	<style name="Detail" fontName="Arial" fontSize="12"/>
+	<style name="Row" mode="Transparent">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$V{REPORT_COUNT}%2 == 0]]></conditionExpression>
+			<style backcolor="#E6DAC3"/>
+		</conditionalStyle>
+	</style>
+	<parameter name="tno" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="tdate" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT passengerinfo.passname,
+       traininfo.trainname,
+       traininfo.trainnumber,
+       reservation.resdate,
+       reservation.ptn,
+       reservation.fromstationid,
+       reservation.tostationid,
+       reservation.adult,
+       reservation.child,
+       reservation.d,
+       reservationdetails.comsubid,
+       reservationdetails.fareid,
+       reservationdetails.seatno
+FROM ((bdrailwayone.reservation reservation
+       INNER JOIN bdrailwayone.reservationdetails reservationdetails
+          ON (reservation.resid = reservationdetails.resid))
+      INNER JOIN bdrailwayone.traininfo traininfo
+         ON (traininfo.trainid = reservation.trainid))
+     INNER JOIN bdrailwayone.passengerinfo passengerinfo
+        ON (passengerinfo.passid = reservation.passid)
+where traininfo.trainnumber=$P{tno} and  reservation.resdate=$P{tdate}]]>
+	</queryString>
+	<field name="passname" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="trainname" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="trainnumber" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="resdate" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="ptn" class="java.lang.Long">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="fromstationid" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="tostationid" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="adult" class="java.lang.Long">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="child" class="java.lang.Long">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="d" class="java.sql.Date">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="comsubid" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="fareid" class="java.lang.Long">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="seatno" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="136" splitType="Stretch">
+			<staticText>
+				<reportElement style="Title" mode="Opaque" x="157" y="0" width="498" height="62" backcolor="#00FF66" uuid="ad055801-4eda-4ebd-977a-3808f34fa7f5"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font pdfFontName="Times-Roman"/>
+				</textElement>
+				<text><![CDATA[Reservation Report]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="SubTitle" mode="Opaque" x="232" y="62" width="357" height="22" backcolor="#00FFFF" uuid="4d055300-654b-4a3e-810e-540e46b8de4a"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" pdfFontName="Times-Roman"/>
+				</textElement>
+				<text><![CDATA[how much reserve ticket]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="16" splitType="Stretch">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="15" width="802" height="1" uuid="28166f16-5351-4824-988c-ffabdfba3820"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement style="Column header" x="0" y="0" width="61" height="15" forecolor="#736343" uuid="d4f9c535-e160-4cdf-a68d-85638b354521"/>
+				<text><![CDATA[passname]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="61" y="0" width="61" height="15" forecolor="#736343" uuid="dc453269-90b0-47a3-b03e-c8909867b372"/>
+				<text><![CDATA[trainname]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="122" y="0" width="61" height="15" forecolor="#736343" uuid="b3290db3-e16b-4344-89ba-f8d7d698f000"/>
+				<text><![CDATA[trainnumber]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="183" y="0" width="61" height="15" forecolor="#736343" uuid="3b807485-d890-42f9-bff5-4ab9d84f7775"/>
+				<text><![CDATA[resdate]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="244" y="0" width="61" height="15" forecolor="#736343" uuid="9e148d53-e51e-4305-a27a-2144fec76ee6"/>
+				<text><![CDATA[ptn]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="305" y="0" width="61" height="15" forecolor="#736343" uuid="1e452cb3-24ac-4103-8daf-a4e35dbfaa7a"/>
+				<text><![CDATA[fromstationid]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="366" y="0" width="61" height="15" forecolor="#736343" uuid="bdc7f84a-0db6-4ca1-9540-d66435ba1850"/>
+				<text><![CDATA[tostationid]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="427" y="0" width="61" height="15" forecolor="#736343" uuid="44685a87-88d7-4086-850e-721bbaea2cbb"/>
+				<text><![CDATA[adult]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="488" y="0" width="61" height="15" forecolor="#736343" uuid="caab7036-e7b2-4051-aaf7-97edc1c3728d"/>
+				<text><![CDATA[child]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="549" y="0" width="61" height="15" forecolor="#736343" uuid="7c188de9-1a87-452d-9738-88d90a5e4c06"/>
+				<text><![CDATA[Journey Date]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="610" y="0" width="61" height="15" forecolor="#736343" uuid="b5c8800a-9207-40de-a7ef-889ed513575f"/>
+				<text><![CDATA[comsubid]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="671" y="0" width="61" height="15" forecolor="#736343" uuid="fb93720b-b9b9-47de-b23c-1ce26a987421"/>
+				<text><![CDATA[fareid]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="732" y="0" width="61" height="15" forecolor="#736343" uuid="371d0c35-5981-4389-8ac2-842a20299f73"/>
+				<text><![CDATA[seatno]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="15" splitType="Stretch">
+			<frame>
+				<reportElement style="Row" mode="Opaque" x="0" y="0" width="802" height="15" uuid="23ae67d2-0f24-4a4a-b753-6f5fb50f276e"/>
+				<textField isStretchWithOverflow="true">
+					<reportElement style="Detail" x="0" y="0" width="61" height="15" uuid="ad66473a-da90-4cd1-a686-1909a2709a64"/>
+					<textFieldExpression><![CDATA[$F{passname}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement style="Detail" x="61" y="0" width="61" height="15" uuid="66275b99-0576-4429-bb45-2447c40af786"/>
+					<textFieldExpression><![CDATA[$F{trainname}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement style="Detail" x="122" y="0" width="61" height="15" uuid="1f969308-c068-4475-84e8-4f96dc8ee06f"/>
+					<textFieldExpression><![CDATA[$F{trainnumber}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" pattern="yyyy/MM/dd">
+					<reportElement style="Detail" x="183" y="0" width="61" height="15" uuid="5e2c59fc-4647-436b-9e8d-4c95fbb8a49d"/>
+					<textFieldExpression><![CDATA[$F{resdate}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement style="Detail" x="244" y="0" width="61" height="15" uuid="173f5ecc-1bec-4917-a56c-5324c702858a"/>
+					<textFieldExpression><![CDATA[$F{ptn}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement style="Detail" x="305" y="0" width="61" height="15" uuid="d6cd4fa8-5d72-4b49-a35f-2bc585098e22"/>
+					<textFieldExpression><![CDATA[$F{fromstationid}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement style="Detail" x="366" y="0" width="61" height="15" uuid="2e002a88-2497-4ddf-87a5-0705b46a1caa"/>
+					<textFieldExpression><![CDATA[$F{tostationid}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement style="Detail" x="427" y="0" width="61" height="15" uuid="49406493-1dcb-4942-b260-b11ea8b059f6"/>
+					<textFieldExpression><![CDATA[$F{adult}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement style="Detail" x="488" y="0" width="61" height="15" uuid="4d889a83-d494-4e3f-9eba-01476d11744f"/>
+					<textFieldExpression><![CDATA[$F{child}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement style="Detail" x="549" y="0" width="61" height="15" uuid="05716340-5d9c-4037-96a8-99c4c93ac4b5"/>
+					<textFieldExpression><![CDATA[$F{d}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement style="Detail" x="610" y="0" width="61" height="15" uuid="ef8b9155-82ce-4150-a113-39b24438a08e"/>
+					<textFieldExpression><![CDATA[$F{comsubid}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement style="Detail" x="671" y="0" width="61" height="15" uuid="a13899cd-c54f-4bc2-b19c-d0a10562166b"/>
+					<textFieldExpression><![CDATA[$F{fareid}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement style="Detail" x="732" y="0" width="61" height="15" uuid="fb03a592-b2eb-49c2-b4c1-4796959bbecd"/>
+					<textFieldExpression><![CDATA[$F{seatno}]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="6" splitType="Stretch">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="3" width="802" height="1" uuid="c895fd12-f1a9-4b9c-9240-f90d4a0f0ffe"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="47" splitType="Stretch">
+			<frame>
+				<reportElement mode="Opaque" x="-21" y="1" width="843" height="24" forecolor="#D0B48E" backcolor="#999999" uuid="1e1e3102-31dd-432d-b1a7-563da451fe70"/>
+				<textField evaluationTime="Report">
+					<reportElement style="Column header" x="783" y="1" width="40" height="20" forecolor="#736343" uuid="c39aa6f1-9437-4742-a7c7-65b61bc13e53"/>
+					<textElement verticalAlignment="Middle">
+						<font size="10" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement style="Column header" x="703" y="1" width="80" height="20" forecolor="#736343" uuid="9b267d78-1dba-4d07-88a4-5b8315b1ac91"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font size="10" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+				</textField>
+				<textField pattern="EEEEE dd MMMMM yyyy">
+					<reportElement style="Column header" x="22" y="1" width="197" height="20" forecolor="#736343" uuid="752ac43a-eef7-4234-a028-14059d865145"/>
+					<textElement verticalAlignment="Middle">
+						<font size="10" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>
